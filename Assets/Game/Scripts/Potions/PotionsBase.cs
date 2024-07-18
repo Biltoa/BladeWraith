@@ -24,8 +24,7 @@ public abstract class PotionsBase : MonoBehaviour, IPickable
         {
             Machine.Pickup = false;
             Vector3 sphereCenter = gameObject.transform.position;
-            Collider[] colliders = Physics.OverlapSphere(sphereCenter, 1f);
-            Debug.Log(gameObject);
+            Collider[] colliders = Physics.OverlapSphere(sphereCenter, 2f); 
             foreach (Collider collider in colliders)
             {
                 if (collider.tag == "Player" && !isPicked)

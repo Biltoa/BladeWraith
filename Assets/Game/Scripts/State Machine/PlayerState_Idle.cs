@@ -20,7 +20,7 @@ public class PlayerState_Idle : PlayerStateBase
     public override void OnUpdateState()
     {
         base.OnUpdateState();
-        //input = new Vector2(Joystick.Horizontal, Joystick.Vertical);
+        input = new Vector2(Joystick.Horizontal, Joystick.Vertical);
         Machine.Controller.Move(Vector3.zero);
         if (input.magnitude > 0)
         {

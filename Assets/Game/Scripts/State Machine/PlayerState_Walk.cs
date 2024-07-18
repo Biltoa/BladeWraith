@@ -25,7 +25,7 @@ public class PlayerState_Walk : PlayerStateBase
     public override void OnUpdateState()
     {
         base.OnUpdateState();
-        //input = new Vector2(Joystick.Horizontal, Joystick.Vertical);
+        input = new Vector2(Joystick.Horizontal, Joystick.Vertical);
         if (Machine.Footsteps.pitch < 0.2f)
         {
             Machine.Footsteps.volume = 0;
