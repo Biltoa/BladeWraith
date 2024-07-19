@@ -7,8 +7,7 @@ public class PlayerState_HeavyAttack1 : BasePlayerAttackState
     public override void OnEnterState()
     {
         base.OnEnterState();
-        Machine.Animator.SetTrigger("isHeavyAttack");
-        Machine.Animator.SetInteger("HeavyAttackNum", 0);
+        Machine.Animator.SetBool("isHeavyAttack1", true);
     }
 
     public override void OnUpdateState()
@@ -20,10 +19,7 @@ public class PlayerState_HeavyAttack1 : BasePlayerAttackState
 
     public override void OnExitState()
     {
-        if (!Machine.HeavyAttack)
-        {
-            Machine.Animator.SetTrigger("isHeavyAttack");
-        }
+        Machine.Animator.SetBool("isHeavyAttack1", false);
         Machine.heavyAttack2.mobMachine = mobMachine;
         Machine.heavyAttack3.mobMachine = mobMachine;
     }

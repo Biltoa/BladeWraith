@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class StateMachineBase : MonoBehaviour
 {
-    protected StateBase currentState;
+    public StateBase currentState;
     
     protected abstract void SetInitialState();
 

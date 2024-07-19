@@ -20,23 +20,33 @@ public class PlayerHealth : HealthBase
     }
     public override void TakeDamage(float amount)
     {
-        if(!isBlocked && !isParried)
+        if (!isBlocked && !isParried)
         {
             base.TakeDamage(amount);
+            Machine.idleState.IsTakingDamage = true;
+            Machine.walkState.IsTakingDamage = true;
+
             Machine.SwitchState(Machine.takeDamage);
+            ChangeHealthUI();
+            return;
         }
         else if (isBlocked)
         {
             Machine.blockState.IsAttacked = true;
-            base.TakeDamage(amount/3);
+            base.TakeDamage(amount / 3);
+            ChangeHealthUI();
         }
         else if (isParried)
         {
             mobMachine.MobHealth.TakeDamage(amount / 2);
+            ChangeHealthUI();
         }
-        healthBarLower.DOFillAmount(health/100f, 0.5f);
-        healthBar.fillAmount = health/100f;
-        healthText.text = $"{health}/{100}";
     }
 
+    private void ChangeHealthUI()
+    {
+        healthBarLower.DOFillAmount(health / 100f, 0.5f);
+        healthBar.fillAmount = health / 100f;
+        healthText.text = $"{health}/{100}";
+    }
 }

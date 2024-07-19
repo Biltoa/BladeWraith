@@ -18,13 +18,14 @@ public class MobHealth : HealthBase
         if(isKnockedUp)
         {
             Machine.SwitchState(Machine.knockupDamage);
-
+            return;
         }
         else if (!isKnockedDown)
         {
             Machine.SwitchState(Machine.takeDamage);
+            return;
         }
-        
+
         isKnockedDown = false;
 
     }

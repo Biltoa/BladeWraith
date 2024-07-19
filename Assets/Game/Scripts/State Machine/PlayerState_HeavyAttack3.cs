@@ -17,11 +17,7 @@ public class PlayerState_HeavyAttack3 : BasePlayerAttackState
         base.OnEnterState();
         damageDealt = false;
         currentJumpForce = jumpForce;
-        if (!Machine.HeavyAttack)
-        {
-            Machine.Animator.SetTrigger("isHeavyAttack");
-        }
-        Machine.Animator.SetInteger("HeavyAttackNum", 2);
+        Machine.Animator.SetBool("isHeavyAttack3", true);
         endTimer = 0;
         isParticlePlayed = false;
     }
@@ -40,7 +36,11 @@ public class PlayerState_HeavyAttack3 : BasePlayerAttackState
         endTimer += Time.deltaTime;
         if (Particles != null && !isParticlePlayed && endTimer > ParticleDelay)
         {
-            Particles.Play();
+            ParticleSystem temp = Instantiate(Particles, Vector3.zero, Quaternion.identity, ParticleParent.transform);
+            temp.transform.localPosition = Vector3.zero;
+            temp.transform.rotation = ParticleParent.transform.rotation;
+            temp.transform.SetParent(null);
+            temp.Play();
             isParticlePlayed = true;
         }
         if (mobMachine != null && mobMachine.gameObject.activeSelf == true)
@@ -60,12 +60,14 @@ public class PlayerState_HeavyAttack3 : BasePlayerAttackState
                     mobMachine.SwitchState(mobMachine.deathState);
                 }
                 Machine.SwitchState(Machine.idleState);
+                return;
             }
         }
         
         if (endTimer > duration)
         {
             Machine.SwitchState(Machine.idleState);
+            return;
         }
     }
 
@@ -75,6 +77,6 @@ public class PlayerState_HeavyAttack3 : BasePlayerAttackState
         {
             mobMachine.takeDamage.isFalling = false;
         }
-        Machine.Animator.SetTrigger("isHeavyAttack");
+        Machine.Animator.SetBool("isHeavyAttack3", false);
     }
 }

@@ -10,8 +10,6 @@ public class SpawnManager : MonoBehaviour
 
     public List<GameObject> spawnPoints;
 
-    public bool finishedSpawning;
-
     public int spawnedMobs;
 
     private int gameLevel;
@@ -19,16 +17,20 @@ public class SpawnManager : MonoBehaviour
     private int spawnIndex;
     private bool isGameWon;
     private float timer;
+    private float nextSpawnTime;
+    private int currentMobIndex;
+    private int mobCount;
+    
 
     private void Start()
     {
         gameLevel = PlayerPrefs.GetInt("Level");
         spawnIndex = 0;
         SpawnEnemies();
-        finishedSpawning = false;
         timer = 0;
-        spawnedMobs = 1;
+        spawnedMobs = 0;
         isGameWon = false;
+        mobCount = 0;
     }
 
     private void Update()
@@ -37,8 +39,20 @@ public class SpawnManager : MonoBehaviour
         if (timer > 10f && spawnedMobs == 0 && !isGameWon)
         {
             UIManager.GameWin();
-            Debug.Log("true");
             isGameWon = true;
+        }
+        if (timer > nextSpawnTime && mobCount < (gameLevel + 1) * 2)
+        {
+            nextSpawnTime = Time.time + 5f;
+            InstantiateEnemy(mobs[currentMobIndex]);
+            currentMobIndex++;
+            if (currentMobIndex > mobs.Count - 1)
+            {
+                currentMobIndex = 0;
+            }
+
+            spawnedMobs++;
+            mobCount++;
         }
     }
 
@@ -55,25 +69,13 @@ public class SpawnManager : MonoBehaviour
             mobs.Add(Mob1Prefab);
             mobs.Add(Mob2Prefab);
         }
-
-        StartCoroutine(SpawnDelay());
     }
 
-    private IEnumerator SpawnDelay()
-    {
-        foreach (GameObject obj in mobs)
-        {
-            InstantiateEnemy(obj);
-            spawnedMobs++;
-            yield return new WaitForSecondsRealtime(5f);
-        }
-        finishedSpawning = true;
-    }
 
     private void InstantiateEnemy(GameObject mob)
     {
         Instantiate(mob, spawnPoints[spawnIndex].transform.position, Quaternion.identity);
-        if(spawnIndex <= 6)
+        if (spawnIndex <= 6)
         {
             spawnIndex++;
         }

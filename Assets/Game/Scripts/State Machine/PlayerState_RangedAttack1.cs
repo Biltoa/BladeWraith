@@ -26,4 +26,10 @@ public class PlayerState_RangedAttack1 : BasePlayerAttackState
             hasAttacked = true;
         }
     }
+
+    public override void OnExitState()
+    {
+        base.OnExitState();
+        Machine.LightAttack = false;
+    }
 }

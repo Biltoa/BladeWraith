@@ -5,11 +5,7 @@ public class PlayerState_LightAttack3 : BasePlayerAttackState
     public override void OnEnterState()
     {
         base.OnEnterState();
-        if (!Machine.LightAttack)
-        {
-            Machine.Animator.SetTrigger("isLightAttack");
-        }
-        Machine.Animator.SetInteger("LightAttackNum", 2);
+        Machine.Animator.SetBool("isLightAttack3", true);
     }
 
     public override void OnUpdateState()
@@ -21,6 +17,6 @@ public class PlayerState_LightAttack3 : BasePlayerAttackState
 
     public override void OnExitState()
     {
-        Machine.Animator.SetTrigger("isLightAttack");
+        Machine.Animator.SetBool("isLightAttack3", false);
     }
 }

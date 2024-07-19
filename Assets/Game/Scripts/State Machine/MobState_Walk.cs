@@ -32,10 +32,12 @@ public class MobState_Walk : MobStateBase
         if (mainPlayer != null && distanceToPlayer < chaseDistance)
         {
             Machine.SwitchState(Machine.runState);
+            return;
         }
         else if (timer > 7)
         {
             Machine.SwitchState(Machine.idleState);
+            return;
         }
     }
 

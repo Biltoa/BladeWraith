@@ -23,6 +23,7 @@ public class PlayerState_Block : PlayerStateBase
         if (!Machine.Block)
         {
             Machine.SwitchState(Machine.idleState);
+            return;
         }
         Machine.Controller.Move(Vector3.zero);
     }

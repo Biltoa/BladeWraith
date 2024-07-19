@@ -31,16 +31,19 @@ public class MobState_Attack : MobStateBase
         if (distanceToPlayer > 1.5f)
         {
             Machine.SwitchState(Machine.runState);
+            return;
         }
         else if (timer >= damageDelay && !dealtDamage)
         {
-            playerHealth.TakeDamage(5f);
+            playerHealth.TakeDamage(30f);
             dealtDamage = true;
         }
 
         if (timer >= duration)
         {
             Machine.SwitchState(Machine.idleState);
+
+            return;
         }
 
     }

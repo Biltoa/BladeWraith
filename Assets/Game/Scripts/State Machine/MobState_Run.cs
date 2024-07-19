@@ -33,10 +33,12 @@ public class MobState_Run : MobStateBase
         if (distanceToPlayer <= 1.5f && playerHealth.health > 0)
         {
             Machine.SwitchState(Machine.attackState);
+            return;
         }
         if (distanceToPlayer > 10f)
         {
             Machine.SwitchState(Machine.walkState);
+            return;
         }
     }
 }

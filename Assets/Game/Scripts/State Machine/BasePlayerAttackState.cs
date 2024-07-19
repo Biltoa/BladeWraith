@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,9 +14,15 @@ public class BasePlayerAttackState : PlayerStateBase
     public float damageDelay;
     public float DamageValue;
     public ParticleSystem Particles;
+    public Vector3 ParticlePosition;
+    public Vector3 ParticleRotation;
+    public GameObject ParticleParent;
     public float ParticleDelay;
     public AudioSource AudioClip;
     public float AudioTimer;
+    public float ShakeStrength;
+    public float ShakeDuration;
+    public int ShakeVibrato = 20;
     protected float timer;
     private bool isDamageDealt;
     protected bool isParticlePlayed;
@@ -41,7 +48,12 @@ public class BasePlayerAttackState : PlayerStateBase
         timer += Time.deltaTime;
         if (Particles != null && !isParticlePlayed && timer > ParticleDelay)
         {
-            Particles.Play();
+            //ParticleSystem temp = Instantiate(Particles, ParticlePosition, Quaternion.Euler(ParticleRotation), ParticleParent.transform);
+            ParticleSystem temp = Instantiate(Particles, Vector3.zero, Quaternion.identity, ParticleParent.transform);
+            temp.transform.localPosition = Vector3.zero;
+            temp.transform.rotation = ParticleParent.transform.rotation;
+            temp.transform.SetParent(null);
+            temp.Play();
             isParticlePlayed = true;
         }
         Machine.currentAcceleration = Mathf.Lerp(Machine.currentAcceleration, movementCurve.Evaluate(timer) * Machine.currentAcceleration, movementSpeed * Time.deltaTime);
@@ -126,6 +138,7 @@ public class BasePlayerAttackState : PlayerStateBase
                 {
                     collider.GetComponentInParent<MobHealth>().TakeDamage(damage);
                 }
+                OnDealtDamage();
             }
         }
     }
@@ -141,9 +154,10 @@ public class BasePlayerAttackState : PlayerStateBase
             if (collider.tag == "smallMob")
             {
                 Vector3 directionToCollider = (collider.transform.position - sphereCenter).normalized;
-                float angleToCollider = Vector3.Angle(Machine.Controller.gameObject.transform.forward, directionToCollider);
-                if (angleToCollider <= attackAngle)
+                float angleToCollider = Vector3.Dot(Machine.Controller.gameObject.transform.forward, directionToCollider);
+                if (angleToCollider >= attackAngle)
                 {
+                    Machine.Controller.transform.rotation = Quaternion.LookRotation(directionToCollider);
                     Machine.heavyAttack1.mobMachine = collider.gameObject.GetComponentInParent<MobStateMachine>();
                     if (Machine.isPowerUped)
                     {
@@ -151,10 +165,16 @@ public class BasePlayerAttackState : PlayerStateBase
                     }
                     else
                     {
-                        collider.GetComponentInParent<MobHealth>().TakeDamage(damage);
+                        collider.GetComponentInParent<MobHealth>().TakeDamage(damage); 
                     }
+                    OnDealtDamage();
                 }
             }
         }
+    }
+
+    public virtual void OnDealtDamage() 
+    {
+        Camera.main.DOShakePosition(ShakeDuration, ShakeStrength, ShakeVibrato);
     }
 }

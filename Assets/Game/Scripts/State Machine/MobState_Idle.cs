@@ -31,10 +31,12 @@ public class MobState_Idle : MobStateBase
         if (mainPlayer != null && distanceToPlayer < chaseDistance)
         {
             Machine.SwitchState(Machine.runState);
+            return;
         }
         else if (timer > 3)
         {
             Machine.SwitchState(Machine.walkState);
+            return;
         }
     }
 }

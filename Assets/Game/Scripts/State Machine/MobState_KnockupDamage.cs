@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class MobState_KnockupDamage : MobStateBase
@@ -10,10 +11,12 @@ public class MobState_KnockupDamage : MobStateBase
     private float currentKnockupForce;
     public AudioSource MobDeath;
     public AudioSource MobHit;
+    public SkinnedMeshRenderer SkinnedMeshRenderer;
     private bool isDead;
     public override void OnEnterState()
     {
         base.OnEnterState();
+        StartCoroutine(ChangeColor());
         timer = 0;
         currentKnockupForce = knockupForce;
         Machine.GetComponent<NavMeshAgent>().enabled = false;
@@ -25,11 +28,13 @@ public class MobState_KnockupDamage : MobStateBase
         else
         {
             Machine.SwitchState(Machine.deathState);
+
             if (!isDead)
             {
                 MobDeath.Play();
                 isDead = true;
             }
+            return;
         }
     }
 
@@ -43,6 +48,7 @@ public class MobState_KnockupDamage : MobStateBase
         if (currentKnockupForce < -knockupForce)
         {
             Machine.SwitchState(Machine.idleState);
+            return;
         }
         timer += Time.deltaTime;
         /*if (timer >= 2f)
@@ -53,5 +59,20 @@ public class MobState_KnockupDamage : MobStateBase
 
     public override void OnExitState()
     {
+    }
+
+    private IEnumerator ChangeColor()
+    {
+        for (int i = 0; i < SkinnedMeshRenderer.materials.Length; i++)
+        {
+            SkinnedMeshRenderer.materials[i].color = Color.red;
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        for (int i = 0; i < SkinnedMeshRenderer.materials.Length; i++)
+        {
+            SkinnedMeshRenderer.materials[i].color = Color.white;
+        }
     }
 }

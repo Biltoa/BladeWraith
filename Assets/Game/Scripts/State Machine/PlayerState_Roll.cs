@@ -12,6 +12,7 @@ public class PlayerState_Roll : PlayerStateBase
     public override void OnEnterState()
     {
         base.OnEnterState();
+
         timer = 0;
         Machine.Animator.SetBool("isDodging", true);
         Machine.Animator.SetInteger("DodgeNum", 2);
@@ -25,6 +26,7 @@ public class PlayerState_Roll : PlayerStateBase
         if (timer > duration)
         {
             Machine.SwitchState(Machine.idleState);
+            return;
         }
         if (timer < speedChangeDuration)
         {
@@ -40,5 +42,6 @@ public class PlayerState_Roll : PlayerStateBase
     public override void OnExitState()
     {
         Machine.Animator.SetBool("isDodging", false);
+        Machine.Roll = false;
     }
 }

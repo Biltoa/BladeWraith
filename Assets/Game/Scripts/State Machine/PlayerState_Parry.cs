@@ -21,6 +21,7 @@ public class PlayerState_Parry : PlayerStateBase
         if (timer > duration)
         {
             Machine.SwitchState(Machine.idleState);
+            return;
         }
         Machine.Controller.Move(Vector3.zero);
     }
@@ -29,5 +30,6 @@ public class PlayerState_Parry : PlayerStateBase
     {
         Machine.Animator.SetBool("isDodging", false);
         Machine.PlayerHealth.isParried = false;
+        Machine.Parry = false;
     }
 }

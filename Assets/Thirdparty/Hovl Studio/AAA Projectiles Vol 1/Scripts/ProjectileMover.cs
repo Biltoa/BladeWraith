@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,9 @@ public class ProjectileMover : MonoBehaviour
     public GameObject flash;
     private Rigidbody rb;
     public GameObject[] Detached;
+    public float ShakeStrength;
+    public float ShakeDuration;
+    public int ShakeVibrato = 20;
 
     void Start()
     {
@@ -59,6 +63,7 @@ public class ProjectileMover : MonoBehaviour
         if (collision.collider.tag == "smallMob")
         {
             collision.collider.GetComponentInParent<MobHealth>().TakeDamage(20f);
+            Camera.main.DOShakePosition(ShakeDuration, ShakeStrength, ShakeVibrato);
         }
         //Spawn hit effect on collision
         if (hit != null)

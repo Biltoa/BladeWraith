@@ -124,6 +124,7 @@ MonoBehaviour:
   isFalling: 0
   MobDeath: {fileID: 2543027261857207266}
   MobHit: {fileID: 900144383211706461}
+  SkinnedMeshRenderer: {fileID: 6122605788753528503}
 --- !u!114 &6047993106605186764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +140,7 @@ MonoBehaviour:
   Machine: {fileID: 5251956238043494847}
   mainPlayer: {fileID: 0}
   navMeshAgent: {fileID: 5989047171518442844}
+  lastDeath: 0
 --- !u!114 &3294236278531023028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,6 +211,7 @@ MonoBehaviour:
   knockupSpeed: 15
   MobDeath: {fileID: 2543027261857207266}
   MobHit: {fileID: 900144383211706461}
+  SkinnedMeshRenderer: {fileID: 6122605788753528503}
 --- !u!1 &3306624500490724501
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,6 +550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4abfea80389bb714cad805df7b18960f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: {fileID: 0}
   idleState: {fileID: 198380518786928689}
   runState: {fileID: 7358242347818826182}
   walkState: {fileID: 355321666690151704}
@@ -731,6 +735,12 @@ CapsuleCollider:
   m_Height: 1.89
   m_Direction: 1
   m_Center: {x: 0, y: 0.92, z: 0}
+--- !u!137 &6122605788753528503 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7312207170140720799, guid: dc134f3050866e447ba5e77d00ac73b6,
+    type: 3}
+  m_PrefabInstance: {fileID: 3570774148494575656}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &6982661359199221177 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: dc134f3050866e447ba5e77d00ac73b6,

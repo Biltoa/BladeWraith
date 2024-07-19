@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4abfea80389bb714cad805df7b18960f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentState: {fileID: 0}
   idleState: {fileID: 518989618374725946}
   runState: {fileID: 2367988035742008809}
   walkState: {fileID: 2305586673762585241}
@@ -253,6 +254,7 @@ MonoBehaviour:
   isFalling: 0
   MobDeath: {fileID: 301279757345717228}
   MobHit: {fileID: 263143450441742526}
+  SkinnedMeshRenderer: {fileID: 2704966720389217074}
 --- !u!114 &8066062825446337650
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +270,7 @@ MonoBehaviour:
   Machine: {fileID: 2165418132961445752}
   mainPlayer: {fileID: 0}
   navMeshAgent: {fileID: 8386698561793646169}
+  lastDeath: 0
 --- !u!114 &9029030857272646494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,6 +341,7 @@ MonoBehaviour:
   knockupSpeed: 15
   MobDeath: {fileID: 301279757345717228}
   MobHit: {fileID: 263143450441742526}
+  SkinnedMeshRenderer: {fileID: 2704966720389217074}
 --- !u!1 &5940476514356462826
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,6 +685,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3557106437385612676}
   m_SourcePrefab: {fileID: 100100000, guid: 4f713e898fae9a14d823918e4c14ef11, type: 3}
+--- !u!137 &2704966720389217074 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -2839295581537669554, guid: 4f713e898fae9a14d823918e4c14ef11,
+    type: 3}
+  m_PrefabInstance: {fileID: 9012040750855165308}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &3205339149587556589 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 4f713e898fae9a14d823918e4c14ef11,

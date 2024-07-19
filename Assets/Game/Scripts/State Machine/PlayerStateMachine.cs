@@ -4,25 +4,24 @@ using UnityEngine;
 
 public class PlayerStateMachine : StateMachineBase
 {
-    public CharacterController Controller;
-    public Animator Animator;
     public float speed = 10f;
     public float acceleration = 2f;
     public float deAcceleration = 1f;
     public float rotationSpeed = 1f;
+    public float currentAcceleration;
 
     public bool isHeavyAttack;
     public bool isLightAttack;
     public bool isRangedAttack;
     public bool isPowerUped;
 
-    public PlayerHealth PlayerHealth;
-
-    public GameObject sword;
-
-    public float currentAcceleration;
     public Vector3 lastDirection;
 
+    public CharacterController Controller;
+    public Animator Animator;
+    public Inventory PlayerInventory;
+    public PlayerHealth PlayerHealth;
+    public GameObject sword;
     public UIManager UIManager;
     public SpawnManager SpawnManager;
 
@@ -32,20 +31,15 @@ public class PlayerStateMachine : StateMachineBase
     public PlayerState_LightAttack1 lightAttack1;
     public PlayerState_LightAttack2 lightAttack2;
     public PlayerState_LightAttack3 lightAttack3;
-
     public PlayerState_HeavyAttack1 heavyAttack1;
     public PlayerState_HeavyAttack2 heavyAttack2;
     public PlayerState_HeavyAttack3 heavyAttack3;
-
     public PlayerState_RangedAttack1 rangedAttack1;
     public PlayerState_RangedAttack2 rangedAttack2;
-
     public PlayerState_Roll rollState;
     public PlayerState_Block blockState;
     public PlayerState_Parry parryState;
-
     public PlayerState_TakeDamage takeDamage;
-
     public PlayerState_Pickup pickupState;
     public PlayerState_DrinkPotion drinkPotion;
 
@@ -99,13 +93,19 @@ public class PlayerStateMachine : StateMachineBase
         switch (input)
         {
             case 0:
-                LightAttack = !LightAttack;
+                LightAttack = true;
                 break;
             case 1:
-                HeavyAttack = !HeavyAttack;
+                HeavyAttack = true;
                 break;
             case 2:
                 SwitchAttack = !SwitchAttack;
+                break;
+            case 3:
+                LightAttack = false;
+                break;
+            case 4:
+                HeavyAttack = false;
                 break;
             default:
                 break;
@@ -117,22 +117,22 @@ public class PlayerStateMachine : StateMachineBase
         switch (input)
         {
             case 0:
-                Roll = !Roll;
+                Roll = true;
                 break;
             case 1:
                 Block = !Block;
                 break;
             case 2:
-                Parry = !Parry;
+                Parry = true;
                 break;
             case 3:
-                Pickup = !Pickup;
+                Pickup = true;
                 break;
             case 4:
-                DrinkPower = !DrinkPower;
+                DrinkPower = true;
                 break;
             case 5:
-                DrinkHealth = !DrinkHealth;
+                DrinkHealth = true;
                 break;
             default:
                 break;

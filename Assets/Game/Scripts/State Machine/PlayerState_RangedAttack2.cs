@@ -47,5 +47,6 @@ public class PlayerState_RangedAttack2 : BasePlayerAttackState
     {
         Machine.Animator.SetBool("isRangedAttack", false);
         Destroy(spellVFX);
+        Machine.HeavyAttack = false;
     }
 }

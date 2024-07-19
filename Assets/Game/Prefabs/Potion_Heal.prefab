@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 6816166415125646834}
   - component: {fileID: 5733618496283680198}
+  - component: {fileID: 1521559352331670578}
   m_Layer: 0
   m_Name: Potion_Heal
-  m_TagString: Untagged
+  m_TagString: Potion
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,9 +47,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58a46a0fcb6948440a8d8b49cd32f3b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Machine: {fileID: 0}
   DestroyDuration: 0.75
-  PlayerInventory: {fileID: 0}
+--- !u!65 &1521559352331670578
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4529448233959804992}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.16108942, y: 0.3645353, z: 0.20486364}
+  m_Center: {x: 0, y: 0.24226765, z: 0}
 --- !u!1001 &3106710765420978570
 PrefabInstance:
   m_ObjectHideFlags: 0

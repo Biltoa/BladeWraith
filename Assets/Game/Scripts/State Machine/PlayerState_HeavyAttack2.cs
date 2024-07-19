@@ -7,11 +7,7 @@ public class PlayerState_HeavyAttack2 : BasePlayerAttackState
     public override void OnEnterState()
     {
         base.OnEnterState();
-        if (!Machine.HeavyAttack)
-        {
-            Machine.Animator.SetTrigger("isHeavyAttack");
-        }
-        Machine.Animator.SetInteger("HeavyAttackNum", 1);
+        Machine.Animator.SetBool("isHeavyAttack2", true);
     }
 
     public override void OnUpdateState()
@@ -30,9 +26,6 @@ public class PlayerState_HeavyAttack2 : BasePlayerAttackState
         {
             mobMachine.MobHealth.isKnockedUp = false;
         }
-        if (!Machine.HeavyAttack)
-        {
-            Machine.Animator.SetTrigger("isHeavyAttack");
-        }
+        Machine.Animator.SetBool("isHeavyAttack2", false);
     }
 }

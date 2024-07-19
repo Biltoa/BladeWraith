@@ -46,6 +46,7 @@ public class PlayerState_DrinkPotion : PlayerStateBase
         {
             DrinkPotion();
             Machine.SwitchState(Machine.idleState);
+            return;
         }
     }
 

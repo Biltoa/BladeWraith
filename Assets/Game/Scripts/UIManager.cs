@@ -73,7 +73,7 @@ public class UIManager : MonoBehaviour
         }
         else if (type == 1 && coins >= 150)
         {
-            PlayerPrefs.SetInt("Coins", coins - 150);
+            PlayerPrefs.SetInt("Coins", coins - 150); 
             SetCoins();
             Inventory.PickupPowerupPotion();
         }
@@ -95,6 +95,7 @@ public class UIManager : MonoBehaviour
         PotionObjects.SetActive(true);
         GameStart.SetActive(false);
         Joystick.SetActive(true);
+        Time.timeScale = 1;
     }
 
     public void PauseGame()
@@ -104,6 +105,7 @@ public class UIManager : MonoBehaviour
         PauseButton.SetActive(false);
         Potions.SetActive(false);
         Joystick.SetActive(false);
+        Time.timeScale = 0;
     }
 
     public void GameWin()
